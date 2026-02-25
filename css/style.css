@@ -1,0 +1,154 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+h1 {
+    text-align: center;
+    margin: 20px 0 50px;
+}
+.comments {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.comment__card {
+    display: flex;
+    gap: 20px;
+    align-items: start;
+
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    width: 800px;
+    max-width: 90%;
+    padding: 20px;
+
+    transition: 0.3s;
+}
+.comment__card:hover {
+    box-shadow: 0 0 20px #d1d5db;
+}
+.comment__card .comment__content {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+.comment__card .comment__content .comment__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+.comment__card .comment__content .comment__head .title {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+.comment__card .comment__content .comment__head .title .name {
+    font-size: 20px;
+}
+.comment__card .comment__content .comment__head .title .email {
+    color: #4b5563;
+}
+
+.comment__card .comment__content .comment__head .more {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    color: #4b5563;
+}
+.comment__card .name__age {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.comment__card .name__age .age {
+    background-color: #e0e7ff;
+    padding: 5px;
+    border-radius: 5px;
+}
+img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.comment__card .comment__content .comment__text__content {
+    margin-bottom: 30px;
+}
+.comment__card .comment__content .comment__text__content .content__title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.comment__card .comment__content .comment__text__content .content__text {
+    color: #111827;
+    line-height: 1.7;
+}
+
+.comment__card .comment__content .comment__btns {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: default;
+}
+.comment__card .comment__content .comment__btns .comment__btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #111827;
+}
+
+/* ✅ Mobile fixes */
+@media (max-width: 600px) {
+    .comment__card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .comment__card img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .comment__card .comment__content .comment__head {
+        flex-direction: column-reverse;
+        gap: 10px;
+        align-items: flex-start;
+        justify-content: flex-end !important;
+        margin-top: -40px;
+    }
+
+    .comment__card .comment__content .comment__head .more {
+        width: 100%;
+        justify-content: end;
+        gap: 10px;
+    }
+
+    .comment__card .comment__content .comment__head .title .name,
+    .comment__card .comment__content .comment__text__content .content__title {
+        font-size: 16px;
+    }
+
+    .comment__card .comment__content .comment__head .title .email,
+    .comment__card .comment__content .comment__text__content .content__text {
+        font-size: 13px;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .comment__card .comment__content .comment__btns {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .comment__card .name__age {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+    }
+}
