@@ -177,7 +177,7 @@ img {
     display: flex;
     align-items: center;
     gap: 20px;
-    cursor: default;
+    cursor: pointer;
 }
 
 .comment__card .comment__content .comment__btns .comment__btn {
@@ -249,12 +249,6 @@ img {
     }
 }
 
-/* .loader {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
 /* HTML: <div class="loader"></div> */
 .loader {
     margin-top: 100px;
@@ -276,3 +270,17 @@ img {
         transform: rotate(1turn);
     }
 }
+
+.heart {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.heart.active {
+    color: red;
+}
+
+.modal__ico{
+    cursor: pointer;
+}
+

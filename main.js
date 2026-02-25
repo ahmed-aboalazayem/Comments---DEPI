@@ -30,7 +30,7 @@ const displayData = () => {
 
             <div class="more">
               <p class="duration">${randomTime()}h ago</p>
-              <i class="fa-solid fa-ellipsis-vertical"></i>
+              <i class="fa-solid fa-ellipsis-vertical modal__ico"></i>
             </div>
           </div>
 
@@ -41,7 +41,7 @@ const displayData = () => {
 
           <div class="comment__btns">
             <div class="comment__btn">
-              <i class="fa-regular fa-heart love__ico"></i>
+              <i class="fa-regular fa-heart heart"></i>
               <p class="num love__num">${randomTime()}</p>
             </div>
             <div class="comment__btn">
@@ -104,3 +104,26 @@ const getData = () => {
 };
 
 getData();
+
+commentsEL.addEventListener("click", function (e) {
+    if (e.target.classList.contains("heart")) {
+        const heart = e.target;
+        const numberEl = heart
+            .closest(".comment__btn")
+            .querySelector(".love__num");
+
+        let currentNumber = parseInt(numberEl.textContent);
+
+        if (heart.classList.contains("fa-regular")) {
+            // Like
+            heart.classList.remove("fa-regular");
+            heart.classList.add("fa-solid", "active");
+            numberEl.textContent = currentNumber + 1;
+        } else {
+            // Unlike
+            heart.classList.remove("fa-solid", "active");
+            heart.classList.add("fa-regular");
+            numberEl.textContent = currentNumber - 1;
+        }
+    }
+});
