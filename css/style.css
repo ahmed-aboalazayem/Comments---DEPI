@@ -40,7 +40,24 @@ body {
     color: var(--text);
 }
 
-h1 {
+.logo {
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+}
+.logo .color {
+    color: #6366f1;
+}
+.logo a {
+    text-decoration: none;
+    color: white;
+    color: #0000;
+    filter: drop-shadow(0 0 15px #6366f180);
+    background-image: linear-gradient(90deg, #2563eb, #8b5cf6);
+    background-clip: text;
+}
+
+h2 {
     text-align: center;
     margin: 20px 0 50px;
     letter-spacing: -0.5px;
