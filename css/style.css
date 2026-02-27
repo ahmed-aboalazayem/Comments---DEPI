@@ -92,6 +92,14 @@ h2 {
         transform 0.2s ease,
         box-shadow 0.2s ease,
         border-color 0.2s ease;
+
+    opacity: 0;
+    transform: translate(-250px);
+    transition: all 0.7s ease;
+}
+.comment__card.show {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .comment__card:hover {
@@ -280,7 +288,75 @@ img {
     color: red;
 }
 
-.modal__ico{
+.modal__ico {
     cursor: pointer;
 }
 
+footer {
+    background-color: #000;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    padding: 50px 0;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    margin-top: 50px;
+}
+footer .logo__name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+footer img {
+    width: 50px;
+}
+
+footer h2 {
+    margin: 0;
+}
+.profile__logo {
+    text-align: center;
+    color: white;
+}
+.profile__logo .color {
+    color: #6366f1;
+}
+.profile__logo a {
+    text-decoration: none;
+    color: white;
+    color: #0000;
+    filter: drop-shadow(0 0 15px #6366f180);
+    background-image: linear-gradient(90deg, #2563eb, #8b5cf6);
+    background-clip: text;
+}
+footer .social__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+footer .social__media i {
+    color: var(--text);
+    border: 1px solid var(--stroke);
+    padding: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+footer .social__media i:hover {
+    transform: translateY(-6px) scale(1.08);
+    color: #25b09b;
+    border-color: #25b09b;
+    box-shadow:
+        0 10px 30px rgba(37, 176, 155, 0.35),
+        0 0 12px rgba(37, 176, 155, 0.4);
+}

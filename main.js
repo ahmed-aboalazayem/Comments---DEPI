@@ -1,4 +1,5 @@
 const commentsEL = document.querySelector(".comments");
+const commentCards = document.querySelectorAll(".comment__card");
 
 let comments = [];
 let avatars = null;
@@ -7,23 +8,37 @@ const randomTime = () => {
     return Math.floor(Math.random() * 24) + 1;
 };
 
+const observer = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            } else {
+                entry.target.classList.remove("show");
+            }
+        });
+    },
+    { threshold: 0.1 },
+);
+commentCards.forEach((el) => observer.observe(el));
+
 const displayData = () => {
     commentsEL.innerHTML = "";
 
-    const limit = Math.min(comments.length, avatars.results.length);
+    const limit = Math.min(comments.length, avatars.users.length);
 
     for (let i = 0; i < limit; i++) {
-        const user = avatars.results[i];
+        const user = avatars.users[i];
 
         commentsEL.innerHTML += `
       <div class="comment__card comment__${comments[i].postId}">
-        <img src="${user.picture.large}" alt="User Image" />
+        <img src="${user.image}" alt="User Image" />
         <div class="comment__content">
           <div class="comment__head">
             <div class="title">
             <div class="name__age">
-            <h3 class="name">${user.name.first} ${user.name.last}</h3>
-            <p class="age">age ${user.dob.age}</p>
+            <h3 class="name">${user.firstName} ${user.lastName}</h3>
+            <p class="age">age ${user.age}</p>
             </div>
               <p class="email">${user.email}</p>
             </div>
@@ -57,50 +72,35 @@ const displayData = () => {
       </div>
     `;
     }
+
+    const commentCards = commentsEL.querySelectorAll(".comment__card");
+    commentCards.forEach((el) => observer.observe(el));
 };
+const getData = async () => {
+    try {
+        const [commentsRes, avatarsRes] = await Promise.all([
+            fetch("https://jsonplaceholder.typicode.com/comments"),
+            fetch("https://dummyjson.com/users?limit=100"),
+        ]);
 
-const getData = () => {
-    const getComments = new XMLHttpRequest();
-    const getAvatars = new XMLHttpRequest();
-
-    let commentsReady = false;
-    let avatarsReady = false;
-
-    const tryRender = () => {
-        if (commentsReady && avatarsReady) displayData();
-    };
-
-    getComments.open("GET", "https://jsonplaceholder.typicode.com/comments");
-    getComments.send();
-
-    getAvatars.open("GET", "https://randomuser.me/api/?results=100");
-    getAvatars.send();
-
-    getComments.addEventListener("readystatechange", function () {
-        if (getComments.readyState === 4) {
-            if (getComments.status >= 200 && getComments.status < 300) {
-                comments = JSON.parse(getComments.responseText);
-                commentsReady = true;
-                tryRender();
-            } else {
-                console.error("Comments request failed:", getComments.status);
-            }
+        if (!commentsRes.ok) {
+            throw new Error("Comments request failed: " + commentsRes.status);
         }
-    });
 
-    getAvatars.addEventListener("readystatechange", function () {
-        if (getAvatars.readyState === 4) {
-            if (getAvatars.status >= 200 && getAvatars.status < 300) {
-                avatars = JSON.parse(getAvatars.responseText);
-                console.log(avatars);
-
-                avatarsReady = true;
-                tryRender();
-            } else {
-                console.error("Avatars request failed:", getAvatars.status);
-            }
+        if (!avatarsRes.ok) {
+            throw new Error("Avatars request failed: " + avatarsRes.status);
         }
-    });
+
+        comments = await commentsRes.json();
+        avatars = await avatarsRes.json();
+
+        console.log("Comments:", comments.length);
+        console.log("Avatars:", avatars.users.length);
+
+        displayData();
+    } catch (error) {
+        console.error("Fetch Error:", error);
+    }
 };
 
 getData();
